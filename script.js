@@ -138,3 +138,13 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
+
+function restartGame() {
+    document.getElementById('header-img').src = 'img/Quiz.jpg';
+    document.getElementById('questionBody').style = '';                 //questionBody wieder anzeigen
+    document.getElementById('endScreen').style = 'display: none';       //Endscreen ausblenden
+    rightQuestions = 0;
+    currentQuestion = 0;
+
+    init();
+}
