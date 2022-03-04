@@ -33,16 +33,21 @@
         <div class="card quiz-card">
             <img id="header-img" src="img/Quiz.jpg" class="card-img-top">
 
-            <div id="endScreen" class="card-body" style="display: none;" >
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">25%</div>
+            </div>
+
+            <div id="endScreen" class="card-body" style="display: none;">
                 <div class="text-center final-headline">
                     Quiz beendet
                 </div>
-                
+
 
                 <div class="text-center">
-                    Du hast <b id="amount-of-right-questions">XXX</b> von <b id="amount-of-questions">XXX</b> richtig beantwortet
+                    Du hast <b id="amount-of-right-questions">XXX</b> von <b id="amount-of-questions">XXX</b> richtig
+                    beantwortet
                 </div>
-                
+
             </div>
 
             <div id="questionBody" class="card-body">
@@ -76,12 +81,13 @@
                     <div>
                         <b id="question-number">1</b> von <b id="all-Questions">5</b> Fragen
                     </div>
-                    
 
-                    <button id="next-button" onclick="nextQuestion()" class="btn btn-primary" disabled>Nächste Frage</button>
+
+                    <button id="next-button" onclick="nextQuestion()" class="btn btn-primary" disabled>Nächste
+                        Frage</button>
                 </div>
 
-                
+
             </div>
         </div>
     </div>

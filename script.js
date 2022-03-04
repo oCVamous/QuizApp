@@ -73,7 +73,7 @@ function init() {
 
 function showQuestion() {
 
-    if (currentQuestion >= questions.length) {
+    if (currentQuestion >= questions.length) {      //Show End Screen
         document.getElementById('endScreen').style = '';
         document.getElementById('questionBody').style = 'display: none';
 
@@ -81,7 +81,16 @@ function showQuestion() {
         document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;
         document.getElementById('header-img').src = 'img/win.png';
         
-    } else {
+    } else {                                        //Show question
+
+        let percent = (currentQuestion+1)/questions.length;
+        percent = Math.round(percent * 100);
+
+        document.getElementById('progress-bar').innerHTML = `${percent}%`;
+        document.getElementById('progress-bar').style = `width: ${percent}%;`;
+
+        console.log('Fortschritt: ', percent);
+
         let question = questions[currentQuestion];
 
         document.getElementById('question-number').innerHTML = currentQuestion + 1;
