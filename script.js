@@ -13,7 +13,7 @@ let questions = [
         "answer_2": "Container",
         "answer_3": "Ein Link",
         "answer_4": "Kursiv",
-        "right_answer": 3 
+        "right_answer": 3
     },
     {
         "question": "Wie bindet man eine Website in eine Website ein?",
@@ -45,7 +45,7 @@ let questions = [
         "answer_2": "a > title {...}",
         "answer_3": "a.title {...}",
         "answer_4": "a=title {...}",
-        "right_answer": 1 
+        "right_answer": 1
     },
     {
         "question": "Wie definiert man in Javascript eine Variable?",
@@ -53,10 +53,12 @@ let questions = [
         "answer_2": "Patrick = let Variablen-Namen",
         "answer_3": "Variablen-Namen = Patrick",
         "answer_4": "let Variablen-Namen = Patrick",
-        "right_answer": 4 
+        "right_answer": 4
     }
 ];
 
+
+let rightQuestions = 0;
 
 let currentQuestion = 0;
 
@@ -70,11 +72,60 @@ function init() {
 }
 
 function showQuestion() {
+
+    if (currentQuestion >= questions.length) {
+        document.getElementById('endScreen').style = '';
+        document.getElementById('questionBody').style = 'display: none';
+
+        document.getElementById('amount-of-questions').innerHTML = questions.length;
+        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;
+        document.getElementById('header-img').src = 'img/win.png';
+        
+    } else {
+        let question = questions[currentQuestion];
+
+        document.getElementById('question-number').innerHTML = currentQuestion + 1;
+        document.getElementById('questionText').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
+
+}
+
+function answer(selection) {
     let question = questions[currentQuestion];
-    
-    document.getElementById('questionText').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+    let selectedQuestionNumber = selection.slice(-1);
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
+    if (selectedQuestionNumber == question['right_answer']) {
+        console.log('Richtige Antwort');
+        document.getElementById(selection).parentNode.classList.add('bg-success');
+        rightQuestions++;
+    } else {
+        console.log('Falsche Antwort');
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+    }
+    document.getElementById('next-button').disabled = false;
+}
+
+function nextQuestion() {
+    currentQuestion++;      //z.B. von 0 auf 1
+    document.getElementById('next-button').disabled = true;
+    resetAnswerButtons();
+    showQuestion();
+}
+
+function resetAnswerButtons() {
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
